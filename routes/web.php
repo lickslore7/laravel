@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SupplierController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
+Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
+Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
+Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
+Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.show');
+Route::get('/supplier/edit/{id}', [SupplierController::class, 'edit'])->name('supplier.edit');
+Route::put('/supplier/{id}', [SupplierController::class, 'update'])->name('supplier.update');
+Route::get('/supplier/getDetails/{id}', [SupplierController::class, 'getDetails']);
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,7 +33,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/table', function () {
-    return view('table');
+    return view('tables');
 });
 
 Route::get('/forgot-password', function () {
