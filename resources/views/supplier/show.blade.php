@@ -1,6 +1,6 @@
 <!-- resources/views/supplier/show.blade.php -->
 
-@extends('supplier.main')
+@extends('layouts.app')
 
 @section('content')
 <div class="page-wrapper">

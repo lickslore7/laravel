@@ -1,9 +1,12 @@
+@extends('layouts.app')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -77,8 +80,8 @@
                 <div id="collapsecustomer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Customer:</h6>
-                        <a class="collapse-item" href="tambahcustomer">Tambah Data Customer</a>
-                        <a class="collapse-item" href="datacustomer">Data Customer</a>
+                        <a class="collapse-item" href="/customer/create">Tambah Data Customer</a>
+                        <a class="collapse-item" href="/customer">Data Customer</a>
                     </div>
                 </div>
             </li>
@@ -407,8 +410,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="about">
-                                    <link rel="stylesheet" type="text/css" href="resources/css/app.css">
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -425,108 +427,56 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h3 class="h4 mb-0 text-gray-800">Informasi</h3>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color:#008B8B;">
-                                <div class="card-body" style="background-color:#008B8B;">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-bold text-primary text-uppercase mb-1">
-                                                <span style="color:#ffffff;">Supplier</span>
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bolders text-gray-800"><span style="color:#ffffff;">0</span></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color: #206bc4">
-                                <div class="card-body" style="background-color: #206bc4">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                <span style="color: #ffffff;">Customer</span>
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span style="color: #ffffff;">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color: #f76707">
-                                <div class="card-body" style="background-color: #f76707">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><span style="color: #ffffff; ">OUTLET</span>
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span style="color: #ffffff;">0</span></div>
+                
+            <!-- End of Footer -->
+            <a href="#" class="btn btn-success btn-sm py-2 px-3" data-toggle="modal" data-target="#editModal" style="margin-left: 30px;">
+                <i>Add / Update</i>
+            </a>
+            <div class="card-body border-bottom py-3">
+                <div class="table-responsive">
+                    {{-- @if (count($supplier) > 0) --}}
+                        <table class="table card-table table-vcenter text-nowrap datatable table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Kode Supplier</th>
+                                    <th>Nama Supplier</th>
+                                    <th>Nomor Telp</th>
+                                    <th>Alamat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($suppliers as $supplier)
+                                    <tr>
+                                        <td>{{ $supplier->id }}</td>
+                                        <td>{{ $supplier->nama_supplier }}</td>
+                                        <td>{{ $supplier->no_telp_supplier }}</td>
+                                        <td>{{ $supplier->alamat_supplier }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <div class="btn-list">
+                                                    <a href="http://localhost:8000/supplier/{{ $supplier->id }}" class="btn btn-info view-supplier">
+                                                        <li class="fas fa-eye"></li>
+                                                    </a>
+                                                    <a href="#" class="btn btn-success btn-sm py-2 px-3" data-toggle="modal" data-target="#editModal">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $supplier->id }}">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <img src="assets/img/icons8-flag-50 (2).png" width="40%"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color: #D63939;">
-                                <div class="card-body" style="background-color: #D63939;">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                <span style="color:#ffffff;">PENGGUNA</span>
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span style="color:#ffffff;">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    {{-- @else
+                        <p>Data supplier kosong.</p>
+                    @endif --}}
                 </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
+            </div>
+            
         <!-- End of Content Wrapper -->
 
     </div>
@@ -556,6 +506,131 @@
         </div>
     </div>
 
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewModalLabel">Detail Supplier</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @if (count($suppliers) > 0)
+                <div class="modal-body">
+                    <div class="card-body border-bottom py-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Kode Supplier</h4>
+                                <p>{{ $supplier->kd_supplier }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Nama Supplier</h4>
+                                <p>{{ $supplier->nama_supplier }}</p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h4>Nomor Telp</h4>
+                                <p>{{ $supplier->no_telp_supplier }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Alamat</h4>
+                                <p>{{ $supplier->alamat_supplier }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="viewSupplierDetails"></div>
+                </div>
+                @else
+                <div class="modal" id="emptyDataModal" tabindex="-1" role="dialog" aria-labelledby="emptyDataModalLabel" aria-hidden="true">
+                    <!-- Tampilkan modal data kosong -->
+                </div>
+            @endif
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Supplier</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulir untuk mengedit atau menambah supplier -->
+                    @if (count($suppliers) > 0)
+                    <form action="{{ isset($supplier) ? route('supplier.update', $supplier->id) : route('supplier.store') }}" method="post">
+                        @csrf
+                        @if(isset($supplier))
+                            @method('put')
+                        @endif
+                        <div class="form-group">
+                            <label for="nama_supplier">ID :</label>
+                            <input type="text" class="form-control" id="id" name="id" placeholder="{{ $supplier->id }}"> @readonly(true)
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_supplier">Nama Supplier:</label>
+                            <input type="text" class="form-control" id="nama_supplier" name="nama_supplier" placeholder="{{ $supplier->nama_supplier }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_telp_supplier">No. Telepon Supplier :</label>
+                            <input type="text" class="form-control" id="no_telp_supplier" name="no_telp_supplier" placeholder="{{ $supplier->no_telp_supplier }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat_supplier">Alamat Supplier :</label>
+                            <textarea class="form-control" id="alamat_supplier" name="alamat_supplier" rows="3" placeholder="{{ $supplier->alamat_supplier }}"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">{{ isset($supplier) ? 'Update' : 'Simpan' }}</button>
+                    </form>
+                    
+                    @else
+                <div class="modal" id="emptyDataModal" tabindex="-1" role="dialog" aria-labelledby="emptyDataModalLabel" aria-hidden="true">
+                    <!-- Tampilkan modal data kosong -->
+                </div>
+            @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    @if (count($suppliers) > 0)
+    <div class="modal fade" id="deleteModal{{ $supplier->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $supplier->id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel{{ $supplier->id }}">Konfirmasi Hapus Supplier</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus supplier "{{ $supplier->nama_supplier }}"?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <form action="{{ route('supplier.destroy', $supplier->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
+    <div class="modal" id="emptyDataModal" tabindex="-1" role="dialog" aria-labelledby="emptyDataModalLabel" aria-hidden="true">
+        <!-- Tampilkan modal data kosong -->
+    </div>
+@endif
+
+
     <!-- Bootstrap core JavaScript-->
     <script src="assets/vendor/jquery/jquery.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -572,7 +647,10 @@
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/chart-area-demo.js"></script>
     <script src="assets/js/demo/chart-pie-demo.js"></script>
+    <!-- Tambahkan ini di bagian bawah file blade Anda -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 
 </body>
-
 </html>

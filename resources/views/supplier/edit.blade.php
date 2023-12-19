@@ -1,13 +1,13 @@
 <!-- resources/views/supplier/edit.blade.php -->
 
-@extends('main')
+@extends('layouts.app')
 
 @section('content')
     <h2>Edit Supplier</h2>
 
     <form action="{{ route('supplier.update', $supplier->id) }}" method="post">
-        @csrf
-        @method('put')
+    @csrf
+    @method('PUT')
 
         <label for="nama_supplier">Nama Supplier:</label>
         <input type="text" name="nama_supplier" value="{{ $supplier->nama_supplier }}" required>

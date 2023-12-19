@@ -1,4 +1,4 @@
-@extends('supplier.main')
+@extends('supplier.index')
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
@@ -65,8 +65,8 @@
                 <div id="collapsesupplier" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Supplier:</h6>
-                        <a class="collapse-item" href="tambahsupplier">Tambah Data Supplier</a>
-                        <a class="collapse-item" href="datasupplier">Data Supplier</a>
+                        <a class="collapse-item" href="/supplier/create">Tambah Data Supplier</a>
+                        <a class="collapse-item" href="/supplier">Data Supplier</a>
                     </div>
                 </div>
             </li>
@@ -80,8 +80,8 @@
                 <div id="collapsecustomer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Customer:</h6>
-                        <a class="collapse-item" href="tambahcustomer">Tambah Data Customer</a>
-                        <a class="collapse-item" href="datacustomer">Data Customer</a>
+                        <a class="collapse-item" href="/customer/create">Tambah Data Customer</a>
+                        <a class="collapse-item" href="/customer">Data Customer</a>
                     </div>
                 </div>
             </li>
@@ -427,100 +427,9 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h3 class="h4 mb-0 text-gray-800">Informasi</h3>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color:#008B8B;">
-                                <div class="card-body" style="background-color:#008B8B;">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                <span style="color: #ffffff;">Supplier</span>
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <span style="color:#ffffff;">{{ $supplier->count() }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color: #206bc4">
-                                <div class="card-body" style="background-color: #206bc4">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                <span style="color: #ffffff;">Customer</span>
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span style="color: #ffffff;">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color: #f76707">
-                                <div class="card-body" style="background-color: #f76707">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><span style="color: #ffffff; ">OUTLET</span>
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span style="color: #ffffff;">0</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <img src="assets/img/icons8-flag-50 (2).png" width="40%"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left shadow h-100 py-2" style="background-color: #D63939;">
-                                <div class="card-body" style="background-color: #D63939;">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                <span style="color:#ffffff;">PENGGUNA</span>
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span style="color:#ffffff;">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
             <!-- End of Footer -->
-            <a href="#" class="btn btn-success btn-sm py-2 px-3" data-toggle="modal" data-target="#editModal">
+            <a href="#" class="btn btn-success btn-sm py-2 px-3" data-toggle="modal" data-target="#editModal" style="margin-left: 30px;">
                 <i>Add / Update</i>
             </a>
             <div class="card-body border-bottom py-3">
@@ -537,22 +446,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($supplier as $suppliers)
+                                @foreach($suppliers as $supplier)
                                     <tr>
-                                        <td>{{ $suppliers->id }}</td>
-                                        <td>{{ $suppliers->nama_supplier }}</td>
-                                        <td>{{ $suppliers->no_telp_supplier }}</td>
-                                        <td>{{ $suppliers->alamat_supplier }}</td>
+                                        <td>{{ $supplier->id }}</td>
+                                        <td>{{ $supplier->nama_supplier }}</td>
+                                        <td>{{ $supplier->no_telp_supplier }}</td>
+                                        <td>{{ $supplier->alamat_supplier }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <div class="btn-list">
-                                                    <a href="http://localhost:8000/supplier/{{ $suppliers->id }}" class="btn btn-info view-supplier">
+                                                    <a href="http://localhost:8000/supplier/{{ $supplier->id }}" class="btn btn-info view-supplier">
                                                         <li class="fas fa-eye"></li>
                                                     </a>
                                                     <a href="#" class="btn btn-success btn-sm py-2 px-3" data-toggle="modal" data-target="#editModal">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $suppliers->id }}">
+                                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $supplier->id }}">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </div>
@@ -606,27 +515,27 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                @if (count($supplier) > 0)
+                @if (count($suppliers) > 0)
                 <div class="modal-body">
                     <div class="card-body border-bottom py-3">
                         <div class="row">
                             <div class="col-md-6">
                                 <h4>Kode Supplier</h4>
-                                <p>{{ $suppliers->kd_supplier }}</p>
+                                <p>{{ $supplier->kd_supplier }}</p>
                             </div>
                             <div class="col-md-6">
                                 <h4>Nama Supplier</h4>
-                                <p>{{ $suppliers->nama_supplier }}</p>
+                                <p>{{ $supplier->nama_supplier }}</p>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <h4>Nomor Telp</h4>
-                                <p>{{ $suppliers->no_telp_supplier }}</p>
+                                <p>{{ $supplier->no_telp_supplier }}</p>
                             </div>
                             <div class="col-md-6">
                                 <h4>Alamat</h4>
-                                <p>{{ $suppliers->alamat_supplier }}</p>
+                                <p>{{ $supplier->alamat_supplier }}</p>
                             </div>
                         </div>
                     </div>
@@ -655,27 +564,27 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulir untuk mengedit atau menambah supplier -->
-                    @if (count($supplier) > 0)
-                    <form action="{{ isset($supplier) ? route('supplier.update', $suppliers->id) : route('supplier.store') }}" method="post">
+                    @if (count($suppliers) > 0)
+                    <form action="{{ isset($supplier) ? route('supplier.update', $supplier->id) : route('supplier.store') }}" method="post">
                         @csrf
                         @if(isset($supplier))
                             @method('put')
                         @endif
                         <div class="form-group">
                             <label for="nama_supplier">ID :</label>
-                            <input type="text" class="form-control" id="nama_supplier" name="nama_supplier" placeholder="{{ $suppliers->id }}"> @readonly(true)
+                            <input type="text" class="form-control" id="id" name="id" placeholder="{{ $supplier->id }}"> @readonly(true)
                         </div>
                         <div class="form-group">
                             <label for="nama_supplier">Nama Supplier:</label>
-                            <input type="text" class="form-control" id="nama_supplier" name="nama_supplier" placeholder="Masukkan Nama Supplier">
+                            <input type="text" class="form-control" id="nama_supplier" name="nama_supplier" placeholder="{{ $supplier->nama_supplier }}">
                         </div>
                         <div class="form-group">
                             <label for="no_telp_supplier">No. Telepon Supplier :</label>
-                            <input type="text" class="form-control" id="no_telp_supplier" name="no_telp_supplier" placeholder="Masukkan No. Telepon Supplier">
+                            <input type="text" class="form-control" id="no_telp_supplier" name="no_telp_supplier" placeholder="{{ $supplier->no_telp_supplier }}">
                         </div>
                         <div class="form-group">
                             <label for="alamat_supplier">Alamat Supplier :</label>
-                            <textarea class="form-control" id="alamat_supplier" name="alamat_supplier" rows="3" placeholder="Masukkan Alamat Supplier"></textarea>
+                            <textarea class="form-control" id="alamat_supplier" name="alamat_supplier" rows="3" placeholder="{{ $supplier->alamat_supplier }}"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ isset($supplier) ? 'Update' : 'Simpan' }}</button>
                     </form>
@@ -691,22 +600,22 @@
     </div>
     
 
-    @if (count($supplier) > 0)
-    <div class="modal fade" id="deleteModal{{ $suppliers->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $suppliers->id }}" aria-hidden="true">
+    @if (count($suppliers) > 0)
+    <div class="modal fade" id="deleteModal{{ $supplier->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $supplier->id }}" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel{{ $suppliers->id }}">Konfirmasi Hapus Supplier</h5>
+                    <h5 class="modal-title" id="deleteModalLabel{{ $supplier->id }}">Konfirmasi Hapus Supplier</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin menghapus supplier "{{ $suppliers->nama_supplier }}"?
+                    Apakah Anda yakin ingin menghapus supplier "{{ $supplier->nama_supplier }}"?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <form action="{{ route('supplier.destroy', $suppliers->id) }}" method="post">
+                    <form action="{{ route('supplier.destroy', $supplier->id) }}" method="post">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">Hapus</button>
