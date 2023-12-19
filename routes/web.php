@@ -12,17 +12,19 @@ use App\Http\Controllers\SupplierController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::delete('/supplier/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
-Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
-Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
-Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
-Route::get('/supplier/{id}', [SupplierController::class, 'show'])->name('supplier.show');
-Route::get('/supplier/edit/{id}', [SupplierController::class, 'edit'])->name('supplier.edit');
-Route::put('/supplier/{id}', [SupplierController::class, 'update'])->name('supplier.update');
-Route::get('/supplier/getDetails/{id}', [SupplierController::class, 'getDetails']);
+
+// Route::resource('supplier', SupplierController::class)->parameters([
+//     'supplier' => 'supplier' // Menyesuaikan dengan nama folder Anda
+// ]);
+
+Route::resource('supplier', SupplierController::class)->parameters([
+    'supplier' => 'supplier' // Menyesuaikan dengan nama folder Anda
+]);
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::get('/register', function () {
     return view('register');
@@ -38,4 +40,8 @@ Route::get('/table', function () {
 
 Route::get('/forgot-password', function () {
     return view('forgot-password');
+});
+
+Route::get('/about', function () {
+    return view('about');
 });
