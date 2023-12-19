@@ -3,42 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Supplier; // Sesuaikan dengan nama model Anda
+use App\Models\Supplier;
 
 class SupplierController extends Controller
 {
-
-    public function destroy($id)
-{
-    $supplier = Supplier::find($id);
-
-    if (!$supplier) {
-        return redirect()->route('supplier.index')->with('error', 'Supplier not found.');
-    }
-
-    $supplier->delete();
-
-    return redirect()->route('supplier.index')->with('success', 'Supplier deleted successfully.');
-}
     // Menampilkan semua data supplier
+    // SupplierController.php
+
     public function index()
     {
-        $supplier = Supplier::all();
-        return view('supplier.supplier', compact('supplier'));
+        $suppliers = Supplier::all();
+        return view('supplier.index', compact('suppliers'));
     }
+
 
     // Menampilkan formulir tambah supplier
     public function create()
     {
-        return view('supplier.create');
+        $suppliers = Supplier::all(); // Anda mungkin perlu mengganti ini sesuai kebutuhan
+        return view('supplier.create', compact('suppliers'));
     }
-
-    public function getDetails($id)
-{
-    $supplier = Supplier::find($id);
-
-    return response()->json($supplier);
-}
 
     // Menyimpan data supplier yang baru ditambahkan
     public function store(Request $request)
@@ -58,19 +42,22 @@ class SupplierController extends Controller
         return redirect()->route('supplier.index')->with('success', 'Supplier berhasil ditambahkan!');
     }
 
-     public function show($id)
+    // Menampilkan detail supplier
+    public function show($id)
     {
         $supplier = Supplier::findOrFail($id);
         return view('supplier.show', compact('supplier'));
     }
 
-    public function edit($id)
-    {
-        $supplier = Supplier::find($id);
+    // Menampilkan formulir edit supplier
+    public function edit($supplier)
+{
+    $supplier = Supplier::find($supplier);
 
-        return view('supplier.edit', compact('supplier'));
-    }
+    return view('supplier.edit', compact('supplier'));
+}
 
+    // Menyimpan perubahan data supplier yang diperbarui
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -83,11 +70,9 @@ class SupplierController extends Controller
 
         if ($supplier) {
             $supplier->update([
-                'id' =>  $request->id,
                 'nama_supplier' => $request->nama_supplier,
                 'no_telp_supplier' => $request->no_telp_supplier,
                 'alamat_supplier' => $request->alamat_supplier,
-                // dan atribut lain yang sesuai
             ]);
 
             return redirect()->route('supplier.index')->with('success', 'Supplier berhasil diperbarui.');
@@ -96,5 +81,17 @@ class SupplierController extends Controller
         }
     }
 
+    // Menghapus supplier
+    public function destroy($id)
+    {
+        $supplier = Supplier::find($id);
 
+        if (!$supplier) {
+            return redirect()->route('supplier.index')->with('error', 'Supplier not found.');
+        }
+
+        $supplier->delete();
+
+        return redirect()->route('supplier.index')->with('success', 'Supplier deleted successfully.');
+    }
 }
